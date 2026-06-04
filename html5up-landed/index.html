@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SAMA Student Association</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255,255,255,0.86);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(15,23,42,0.08);
+        }
+
+        .nav {
+            height: 78px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #2563eb;
+            letter-spacing: -0.04em;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav a {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white !important;
+            padding: 14px 28px;
+            border-radius: 999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: 0.25s ease;
+            box-shadow: 0 12px 30px rgba(37,99,235,0.25);
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-3px);
+        }
+
+        .btn.secondary {
+            background: white;
+            color: #2563eb !important;
+            border: 1px solid #dbeafe;
+            box-shadow: none;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 0 80px;
+            background:
+                linear-gradient(135deg, rgba(239,246,255,0.96), rgba(255,255,255,0.84)),
+                url("images/hero.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5.8rem);
+            line-height: 0.95;
+            letter-spacing: -0.07em;
+            margin-bottom: 28px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #475569;
+            max-width: 620px;
+            margin-bottom: 34px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-card {
+            background: rgba(255,255,255,0.78);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.7);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 30px 80px rgba(15,23,42,0.14);
+        }
+
+        .hero-card img {
+            border-radius: 22px;
+            height: 360px;
+            object-fit: cover;
+            margin-bottom: 22px;
+        }
+
+        .hero-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .hero-card p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-head {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 60px;
+        }
+
+        .section-head h2 {
+            font-size: 3rem;
+            letter-spacing: -0.05em;
+            margin-bottom: 16px;
+        }
+
+        .section-head p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            background: white;
+            padding: 34px;
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 18px 45px rgba(15,23,42,0.06);
+            transition: 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 26px 70px rgba(15,23,42,0.12);
+        }
+
+        .icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 1.4rem;
+            margin-bottom: 22px;
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #64748b;
+        }
+
+        .events {
+            background: #0f172a;
+            color: white;
+        }
+
+        .events .section-head p,
+        .events .card p {
+            color: #cbd5e1;
+        }
+
+        .events .section-head h2,
+        .events .card h3 {
+            color: white;
+        }
+
+        .events .card {
+            background: #1e293b;
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .event-details {
+            display: none;
+            margin-top: 32px;
+            background: white;
+            color: #0f172a;
+            padding: 28px;
+            border-radius: 22px;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .event-details p {
+            color: #475569;
+            margin: 10px 0;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .showcase-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 22px 55px rgba(15,23,42,0.08);
+        }
+
+        .showcase-card img {
+            height: 330px;
+            object-fit: cover;
+        }
+
+        .showcase-content {
+            padding: 30px;
+        }
+
+        .showcase-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .showcase-content p {
+            color: #64748b;
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .stat {
+            text-align: center;
+            background: white;
+            padding: 42px 24px;
+            border-radius: 26px;
+            border: 1px solid #dbeafe;
+        }
+
+        .stat h3 {
+            font-size: 3rem;
+            color: #2563eb;
+            letter-spacing: -0.05em;
+        }
+
+        .stat p {
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        .sponsor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .sponsor {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            font-weight: 800;
+            color: #334155;
+        }
+
+        .contact {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            letter-spacing: -0.05em;
+            margin-bottom: 16px;
+        }
+
+        .contact p {
+            color: #dbeafe;
+            margin-bottom: 32px;
+        }
+
+        .contact-form {
+            display: flex;
+            gap: 14px;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        input[type="email"] {
+            flex: 1;
+            height: 56px;
+            border-radius: 999px;
+            border: none;
+            padding: 0 22px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .contact .btn {
+            background: #0f172a;
+            box-shadow: none;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 42px 20px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid,
+            .showcase-grid,
+            .cards,
+            .stats-grid,
+            .sponsor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav ul {
+                gap: 14px;
+                font-size: 0.9rem;
+            }
+
+            .contact-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container nav">
+        <a href="#" class="logo">SAMA</a>
+
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#membership">Membership</a></li>
+                <li><a href="#sponsors">Sponsors</a></li>
+                <li><a href="#contact" class="btn">Join Now</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container hero-grid">
+        <div>
+            <span class="eyebrow">Student-led accounting community</span>
+            <h1>Where accounting students meet the industry.</h1>
+            <p>
+                SAMA connects students with networking events, career workshops,
+                industry mentors and resources that support professional growth.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#membership" class="btn">Get Involved</a>
+                <a href="#events" class="btn secondary">View Events</a>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <img src="images/pic03.jpg" alt="Students networking at a professional event">
+            <h3>Build connections before graduation</h3>
+            <p>
+                Join a community designed to help students feel more confident,
+                connected and career-ready.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <div class="container">
+        <div class="section-head">
+            <h2>Why Join SAMA?</h2>
+            <p>
+                SAMA helps accounting students move beyond lectures by connecting them
+                with people, practical experiences and professional opportunities.
+            </p>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <div class="icon"><i class="fas fa-users"></i></div>
+                <h3>Networking</h3>
+                <p>Meet peers, alumni and industry guests through student-focused events.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon"><i class="fas fa-briefcase"></i></div>
+                <h3>Career Development</h3>
+                <p>Access workshops, resume guidance and practical employability support.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Industry Exposure</h3>
+                <p>Learn from professionals and discover pathways into accounting careers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="events" class="events">
+    <div class="container">
+        <div class="section-head">
+            <h2>Upcoming Events</h2>
+            <p>
+                Explore activities designed to help students build confidence,
+                industry awareness and professional networks.
+            </p>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Networking Night</h3>
+                <p>Meet professionals and other students in a relaxed campus setting.</p>
+            </div>
+
+            <div class="card">
+                <h3>Resume Workshop</h3>
+                <p>Improve your resume with guidance from experienced mentors.</p>
+            </div>
+
+            <div class="card">
+                <h3>Industry Panel</h3>
+                <p>Hear from accounting graduates and employers about career pathways.</p>
+            </div>
+        </div>
+
+        <div style="text-align:center; margin-top:36px;">
+            <button id="eventToggle" class="btn" onclick="toggleEvents()">Show Event Details</button>
+        </div>
+
+        <div id="eventDetails" class="event-details">
+            <h3>Event Details</h3>
+            <p><strong>Networking Night</strong> — Week 7, Clayton Campus</p>
+            <p><strong>Resume Workshop</strong> — Week 8, Online</p>
+            <p><strong>Industry Panel</strong> — Week 9, Caulfield Campus</p>
+        </div>
+    </div>
+</section>
+
+<section id="resources">
+    <div class="container">
+        <div class="section-head">
+            <h2>Student Resources</h2>
+            <p>
+                Practical tools and information to help students prepare for internships,
+                graduate roles and professional development.
+            </p>
+        </div>
+
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <img src="images/pic04.jpg" alt="Students participating in a workshop">
+                <div class="showcase-content">
+                    <h3>Workshop Support</h3>
+                    <p>
+                        SAMA provides workshops focused on resumes, interview skills,
+                        LinkedIn profiles and professional communication.
+                    </p>
+                </div>
+            </div>
+
+            <div class="showcase-card">
+                <img src="images/hero.jpg" alt="Students attending a university event">
+                <div class="showcase-content">
+                    <h3>Career Guides</h3>
+                    <p>
+                        Members can access student-friendly guides about accounting pathways,
+                        internship preparation and networking confidence.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="membership" class="stats">
+    <div class="container">
+        <div class="section-head">
+            <h2>Our Impact in 2026</h2>
+            <p>
+                SAMA supports a growing student community through events,
+                partnerships and professional development activities.
+            </p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat">
+                <h3>500+</h3>
+                <p>Student Members</p>
+            </div>
+
+            <div class="stat">
+                <h3>20+</h3>
+                <p>Industry Partners</p>
+            </div>
+
+            <div class="stat">
+                <h3>120K+</h3>
+                <p>Social Reach</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="sponsors">
+    <div class="container">
+        <div class="section-head">
+            <h2>Our Sponsors</h2>
+            <p>
+                Our fictional partner network supports student learning,
+                mentoring and career engagement.
+            </p>
+        </div>
+
+        <div class="sponsor-grid">
+            <div class="sponsor">Nexus Corp</div>
+            <div class="sponsor">Aether Tech</div>
+            <div class="sponsor">Synthesis</div>
+            <div class="sponsor">Forge Logistics</div>
+            <div class="sponsor">Quantum Solution</div>
+            <div class="sponsor">Orbit Energy</div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <div class="container">
+        <h2>Ready to get involved?</h2>
+        <p>Join the SAMA community and start building your future network.</p>
+
+        <form class="contact-form">
+            <input type="email" placeholder="Your Email Address">
+            <button type="button" class="btn" onclick="showMessage()">Join Now</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 SAMA. Designed and developed as a student website project.</p>
+</footer>
+
+<script>
+function showMessage() {
+    alert("Thanks for your interest in SAMA!");
+}
+
+function toggleEvents() {
+    var details = document.getElementById("eventDetails");
+    var button = document.getElementById("eventToggle");
+
+    if (details.style.display === "none" || details.style.display === "") {
+        details.style.display = "block";
+        button.textContent = "Hide Event Details";
+    } else {
+        details.style.display = "none";
+        button.textContent = "Show Event Details";
+    }
+}
+</script>
+
+</body>
+</html>
